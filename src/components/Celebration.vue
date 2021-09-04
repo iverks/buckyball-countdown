@@ -1,18 +1,17 @@
 <template>
   <div>
-    <img v-bind:src="'/assets/logo.png'"/>
+    <h1 class="grattis">Gratulerer med dagen Timini!</h1>
+    <img src="../assets/logo.png" >
   </div>
 </template>
 
 <script>
 export default {
-  setup () {
-    var audio = new Audio("./assets/size_matters.mp3")
-    audio.play();
-  }
+  name: "Celebration"
 }
 </script>
 
-<style lang="css" scoped>
+
+<style lang="css">
 
 </style>

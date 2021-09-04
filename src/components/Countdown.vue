@@ -1,13 +1,14 @@
 <template>
   <div class="underlay" />
   <div v-if="counting" class="clock-wrapper">
-      <div class="clock-border">
+    <div class="clock-border">
       <div class="hours">{{hours}}</div>
       <div class="dots">:</div> 
       <div class="minutes">{{minutes}}</div>
       <div class="dots">:</div> 
       <div class="seconds">{{seconds}}</div>
     </div>
+    <button class="cd-skipper" v-on:click="counting=false">Skip countdown</button>
   </div>
   <div v-else>
     <Celebration />
@@ -46,7 +47,7 @@ export default {
         state.hours = addZero(Math.floor(difftime / (1000*60*60)));
         state.minutes = addZero(Math.floor((difftime - state.hours*1000*60*60) / (1000*60)));
         state.seconds = addZero(Math.floor((difftime - state.hours*1000*60*60 - state.minutes*1000*60) / (1000)));
-        if(Math.floor(difftime/1000)==0 || (difftime<0 && now.getMonth()==then.getMonth() && now.getDate()==then.getDate())) {
+        if(Math.floor(difftime/1000)==0 || (difftime<0 && now.getMonth()==then.getMonth() && now.getDate()==then.getDate()) || !state.counting) {
           clearInterval(interval);
           state.counting = false;
         }
@@ -72,7 +73,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
 .hours, .minutes, .seconds {
   font-size: 8em;
   display: inline-flex;
@@ -109,5 +110,12 @@ export default {
   top:0px;
   left:0px;
   z-index:-1000;
+}
+
+.cd-skipper {
+  display: none;
+  position: absolute;
+  top: 10%;
+  left: 10%;
 }
 </style> 
