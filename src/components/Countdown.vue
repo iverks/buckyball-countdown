@@ -36,14 +36,21 @@ export default {
       function update() {
         const now = new Date;
         const difftime = then-now;
-        state.hours = Math.floor(difftime / (1000*60*60));
-        state.minutes = Math.floor((difftime - state.hours*1000*60*60) / (1000*60));
-        state.seconds = Math.floor((difftime - state.hours*1000*60*60 - state.minutes*1000*60) / (1000));
+        state.hours = addZero(Math.floor(difftime / (1000*60*60)));
+        state.minutes = addZero(Math.floor((difftime - state.hours*1000*60*60) / (1000*60)));
+        state.seconds = addZero(Math.floor((difftime - state.hours*1000*60*60 - state.minutes*1000*60) / (1000)));
         if(Math.floor(difftime/1000)==0) {
           clearInterval(interval);
           state.counting = false;
         }
       }
+    }
+
+    function addZero(num) {
+      if(Math.abs(num)<10) {
+        num = "0"+num;
+      }
+      return num;
     }
   
     return {
@@ -58,8 +65,21 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.hours, .mins, .seconds {
+<style lang="css" scoped>
+.hours, .minutes, .seconds {
+  font-size: 8em;
+  display: inline-flex;
+}
+.dots {
   font-size: 8em;
 }
+.clock-wrapper {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
 </style> 
