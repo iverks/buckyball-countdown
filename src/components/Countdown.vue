@@ -74,13 +74,11 @@ export default {
 </script>
 
 <style lang="css">
-.hours, .minutes, .seconds {
-  font-size: 8em;
+.hours, .minutes, .seconds, .dots {
+  font-size: min(20vw, 10em);
   display: inline-flex;
 }
-.dots {
-  font-size: 8em;
-}
+
 .clock-wrapper {
   display: flex;
   justify-content: center;
